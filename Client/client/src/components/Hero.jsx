@@ -54,7 +54,7 @@ const Hero = () => {
         "
       >
         <img
-          src="/src/assets/hero-model.png"
+          src="/hero-model.png"
           alt="StyleHive Fashion Collection"
           className="
             h-full

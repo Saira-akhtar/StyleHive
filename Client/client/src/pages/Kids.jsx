@@ -39,7 +39,7 @@ const Kids = () => {
       <CollectionBanner
         title="Kids' Collection"
         description="Playful, comfortable, and durable pieces made for everyday adventures — designed for kids of every age."
-        image="src/assets/kids-banner.png"
+        image="/kids-banner.png"
       />
       
 

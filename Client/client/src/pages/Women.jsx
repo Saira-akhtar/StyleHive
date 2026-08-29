@@ -39,7 +39,7 @@ const Women = () => {
       <CollectionBanner
         title="Women's Collection"
         description="Explore refined silhouettes, luxe knits, and effortless separates designed for the modern woman."
-        image="src/assets/women-banner.png"
+        image="/women-banner.png"
       />
 
       {/* ================================

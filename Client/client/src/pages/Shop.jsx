@@ -88,7 +88,7 @@ const Shop = () => {
       <CollectionBanner
         title="Shop All"
         description="Browse our complete collection — timeless essentials and seasonal favorites for everyone."
-        image="/src/assets/shop-banner.png"
+        image="/shop-banner.png"
       />
 
       {/* PRODUCTS */}

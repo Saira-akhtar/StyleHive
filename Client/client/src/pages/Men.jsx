@@ -35,7 +35,7 @@ const Men = () => {
       <CollectionBanner
         title="Men's Collection"
         description="Discover our curated selection of timeless tailoring, premium outerwear, and essential accessories for the modern gentleman."
-        image="src/assets/men-banner.png"
+        image="/men-banner.png"
       />
 
       {/* Products Section */}
