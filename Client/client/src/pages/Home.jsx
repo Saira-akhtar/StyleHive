@@ -1,5 +1,5 @@
 import Hero from "../components/Hero";
-import CategoryShowcase from "../components/CategoryShowcase";
+import CategoryShowCase from "../components/CategoryShowCase";
 import AboutSection from "../components/AboutSection";
 import ContactSection from "../components/ContactSection";
 
@@ -10,7 +10,7 @@ const   Men = () => {
     <main>
 
       <Hero />
-      <CategoryShowcase/>
+      <CategoryShowCase/>
       <AboutSection/>
       <ContactSection/>
       
