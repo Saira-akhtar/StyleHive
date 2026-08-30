@@ -1,12 +1,15 @@
 import app from "./app.js";
 import connectDB from "./config/db.js";
 import dotenv from "dotenv";
+import cors from "cors"; // <-- Yeh line add karein
 
 dotenv.config();
 
 connectDB();
 
-// Local testing ke liye PORT listen karega, lekin Vercel isay ignore kar ke export default ko use karega
+
+app.use(cors()); 
+
 const PORT = process.env.PORT || 5000;
 
 if (process.env.NODE_ENV !== "production") {
