@@ -6,21 +6,21 @@ const categories = [
     tagline: "Elevated everyday essentials.",
     cta: "SHOP MEN",
     to: "/men",
-    image: "/src/assets/category-men.png",
+    image: "/category-men.png",
   },
   {
     label: "WOMEN",
     tagline: "Effortless style for every you.",
     cta: "SHOP WOMEN",
     to: "/women",
-    image: "/src/assets/category-women.png",
+    image: "/category-women.png",
   },
   {
     label: "KIDS",
     tagline: "Comfort meets cool everyday.",
     cta: "SHOP KIDS",
     to: "/kids",
-    image: "/src/assets/category-kids.png",
+    image: "/category-kids.png",
   },
 ];
 
