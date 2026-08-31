@@ -9,13 +9,22 @@ import orderRoutes from "./routes/orderRoutes.js";
 import reviewRoutes from "./routes/reviewRoutes.js";
 import returnRequestRoutes from "./routes/returnRequestRoutes.js";
 import cors from "cors";
+import connectDB from "./config/db.js";
 
 
 dotenv.config();
 const app=express();
 app.use(cors()); 
-
 app.use(express.json());
+
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (error) {
+    res.status(500).json({ message: "Database connection failed", error: error.message });
+  }
+});
 
 app.get("/",(req,res)=>{
     res.send("welcome to stylehive server");
