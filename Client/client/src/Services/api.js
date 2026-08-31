@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://stylehive-2bcfa246j-stylehive.vercel.app",
+  baseURL:"https://stylehive-2bcfa246j-stylehive.vercel.app/api",
 });
 API.interceptors.request.use(
   (config) => {
