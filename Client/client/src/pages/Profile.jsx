@@ -27,9 +27,7 @@ const Profile = () => {
 
   const userId = user?._id;
 
-  // ===============================
   // LOGOUT
-  // ===============================
 
   const handleLogout = () => {
     localStorage.removeItem("user");
@@ -38,33 +36,25 @@ const Profile = () => {
     navigate("/login");
   };
 
-  // ===============================
   // ORDERS
-  // ===============================
 
   const [orders, setOrders] = useState([]);
   const [loadingOrders, setLoadingOrders] = useState(true);
 
-  // ===============================
   // REVIEWS
-  // ===============================
 
   const [reviewTarget, setReviewTarget] = useState(null);
   const [reviews, setReviews] = useState([]);
   const [loadingReviews, setLoadingReviews] = useState(true);
   const [reviewsReloadKey, setReviewsReloadKey] = useState(0);
 
-  // ===============================
   // RETURN REQUEST
-  // ===============================
 
   const [returnTarget, setReturnTarget] = useState(null);
   const [returnReason, setReturnReason] = useState("");
   const [returnLoading, setReturnLoading] = useState(false);
 
-  // ===============================
   // GET MY REVIEWS
-  // ===============================
 
   useEffect(() => {
     let ignore = false;
@@ -109,9 +99,7 @@ const Profile = () => {
     };
   }, [userId, reviewsReloadKey]);
 
-  // ===============================
   // GET MY ORDERS
-  // ===============================
 
   useEffect(() => {
     let ignore = false;
@@ -156,9 +144,7 @@ const Profile = () => {
     };
   }, [userId]);
 
-  // ===============================
   // DELETE REVIEW
-  // ===============================
 
   const handleDelete = async (reviewId) => {
     try {
@@ -175,9 +161,7 @@ const Profile = () => {
     }
   };
 
-  // ===============================
   // CREATE RETURN REQUEST
-  // ===============================
 
   const handleReturnRequest = async () => {
     if (!returnTarget) return;
@@ -220,57 +204,58 @@ const Profile = () => {
     }
   };
 
-  // ===============================
   // REVIEWED PRODUCTS
-  // ===============================
 
   const reviewedProductIds = new Set(
     reviews.map((review) => review.product?._id).filter(Boolean),
   );
 
   return (
-    <div className="min-h-screen bg-[#F8F8F8] py-12 px-6">
-      <div className="max-w-[1000px] mx-auto">
+    <div className="min-h-screen bg-[#F8F8F8] px-4 py-8 sm:px-6 sm:py-12">
+      <div className="mx-auto max-w-[1000px]">
         {/* PAGE HEADER */}
 
-        <div className="mb-10">
-          <h1 className="text-[28px] font-serif font-bold text-[#222]">
+        <div className="mb-6 sm:mb-10">
+          <h1 className="font-serif text-[22px] font-bold text-[#222] sm:text-[28px]">
             MY ACCOUNT
           </h1>
 
-          <p className="text-sm text-gray-500 mt-2">
+          <p className="mt-2 text-sm text-gray-500">
             Welcome back, {user?.name || "User"}!
           </p>
         </div>
 
         {/* PROFILE INFORMATION */}
 
-        <div className="bg-white border border-gray-200 p-8 mb-8">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-[16px] font-semibold tracking-wide text-[#222]">
+        <div className="mb-6 border border-gray-200 bg-white p-4 sm:mb-8 sm:p-8">
+          {/* Phone: title on top, buttons below. Tablet up: side by side. */}
+          <div className="mb-6 flex flex-col gap-4 sm:mb-8 sm:flex-row sm:items-center sm:justify-between">
+            <h2 className="text-[15px] font-semibold tracking-wide text-[#222] sm:text-[16px]">
               PROFILE INFORMATION
             </h2>
 
+            {/* flex-1 makes both buttons share the width on phones */}
             <div className="flex items-center gap-3">
-              <button className="flex items-center gap-2 text-[11px] font-medium border border-[#222] px-4 py-2 hover:bg-[#222] hover:text-white transition duration-300">
+              <button className="flex flex-1 items-center justify-center gap-2 border border-[#222] px-4 py-2.5 text-[11px] font-medium transition duration-300 hover:bg-[#222] hover:text-white sm:flex-none sm:py-2">
                 <FiEdit2 size={14} />
                 EDIT PROFILE
               </button>
 
               <button
                 onClick={handleLogout}
-                className="border border-red-400 text-red-500 px-4 py-2 text-[11px] font-medium hover:bg-red-500 hover:text-white transition duration-300"
+                className="flex-1 border border-red-400 px-4 py-2.5 text-[11px] font-medium text-red-500 transition duration-300 hover:bg-red-500 hover:text-white sm:flex-none sm:py-2"
               >
                 LOGOUT
               </button>
             </div>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          {/* 1 column on phones, 3 columns from md up */}
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
             {/* NAME */}
 
             <div>
-              <div className="flex items-center gap-2 mb-2 text-[#B87575]">
+              <div className="mb-2 flex items-center gap-2 text-[#B87575]">
                 <FiUser size={17} />
 
                 <span className="text-[10px] font-medium tracking-wide">
@@ -286,7 +271,7 @@ const Profile = () => {
             {/* EMAIL */}
 
             <div>
-              <div className="flex items-center gap-2 mb-2 text-[#B87575]">
+              <div className="mb-2 flex items-center gap-2 text-[#B87575]">
                 <FiMail size={17} />
 
                 <span className="text-[10px] font-medium tracking-wide">
@@ -294,7 +279,8 @@ const Profile = () => {
                 </span>
               </div>
 
-              <p className="text-sm text-[#222]">
+              {/* break-all stops long emails from overflowing */}
+              <p className="break-all text-sm text-[#222]">
                 {user?.email || "Not available"}
               </p>
             </div>
@@ -302,7 +288,7 @@ const Profile = () => {
             {/* PHONE */}
 
             <div>
-              <div className="flex items-center gap-2 mb-2 text-[#B87575]">
+              <div className="mb-2 flex items-center gap-2 text-[#B87575]">
                 <FiPhone size={17} />
 
                 <span className="text-[10px] font-medium tracking-wide">
@@ -319,11 +305,11 @@ const Profile = () => {
 
         {/* MY ORDERS */}
 
-        <div className="bg-white border border-gray-200 p-8 mb-8">
-          <div className="flex items-center gap-3 mb-6">
+        <div className="mb-6 border border-gray-200 bg-white p-4 sm:mb-8 sm:p-8">
+          <div className="mb-6 flex items-center gap-3">
             <FiPackage size={20} className="text-[#B87575]" />
 
-            <h2 className="text-[16px] font-semibold tracking-wide text-[#222]">
+            <h2 className="text-[15px] font-semibold tracking-wide text-[#222] sm:text-[16px]">
               MY ORDERS
             </h2>
           </div>
@@ -339,27 +325,30 @@ const Profile = () => {
           ) : (
             <div className="space-y-5">
               {orders.map((order) => (
-                <div key={order._id} className="border border-gray-200 p-6">
-                  <div className="flex items-center justify-between mb-3">
-                    <p className="text-sm font-semibold text-[#222]">
+                <div
+                  key={order._id}
+                  className="border border-gray-200 p-4 sm:p-6"
+                >
+                  <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+                    <p className="break-all text-sm font-semibold text-[#222]">
                       {order.orderNumber}
                     </p>
 
-                    <span className="text-[10px] font-medium px-3 py-1 border border-[#B87575] text-[#B87575] uppercase">
+                    <span className="border border-[#B87575] px-3 py-1 text-[10px] font-medium uppercase text-[#B87575]">
                       {order.status}
                     </span>
                   </div>
 
-                  <p className="text-xs text-gray-500 mb-2">
+                  <p className="mb-2 text-xs text-gray-500">
                     {new Date(order.createdAt).toLocaleDateString()}
                   </p>
 
-                  <p className="text-sm text-gray-700 mb-2">
+                  <p className="mb-2 text-sm text-gray-700">
                     Total: Rs {order.pricing?.total}
                   </p>
 
                   {order.status === "delivered" && (
-                    <div className="mt-4 pt-4 border-t border-gray-100 space-y-3">
+                    <div className="mt-4 space-y-4 border-t border-gray-100 pt-4">
                       {order.items?.map((item, index) => {
                         const productId = item.product?._id || item.product;
 
@@ -369,7 +358,7 @@ const Profile = () => {
                         return (
                           <div
                             key={item.product?._id || item._id || index}
-                            className="flex items-center justify-between gap-4"
+                            className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4"
                           >
                             <p className="text-sm text-[#222]">{item.name}</p>
 
@@ -386,7 +375,7 @@ const Profile = () => {
                                       product: item.product,
                                     })
                                   }
-                                  className="text-[10px] font-medium border border-[#B87575] text-[#B87575] px-3 py-1.5 hover:bg-[#B87575] hover:text-white transition duration-300"
+                                  className="flex-1 border border-[#B87575] px-3 py-2.5 text-[10px] font-medium text-[#B87575] transition duration-300 hover:bg-[#B87575] hover:text-white sm:flex-none sm:py-1.5"
                                 >
                                   WRITE A REVIEW
                                 </button>
@@ -401,7 +390,7 @@ const Profile = () => {
                                     productName: item.name,
                                   })
                                 }
-                                className="text-[10px] font-medium border border-red-300 text-red-500 px-3 py-1.5 hover:bg-red-500 hover:text-white transition duration-300"
+                                className="flex-1 border border-red-300 px-3 py-2.5 text-[10px] font-medium text-red-500 transition duration-300 hover:bg-red-500 hover:text-white sm:flex-none sm:py-1.5"
                               >
                                 REQUEST RETURN
                               </button>
@@ -419,11 +408,11 @@ const Profile = () => {
 
         {/* MY REVIEWS */}
 
-        <div className="bg-white border border-gray-200 p-8">
-          <div className="flex items-center gap-3 mb-8">
+        <div className="border border-gray-200 bg-white p-4 sm:p-8">
+          <div className="mb-6 flex items-center gap-3 sm:mb-8">
             <FiStar size={20} className="text-[#B87575]" />
 
-            <h2 className="text-[16px] font-semibold tracking-wide text-[#222]">
+            <h2 className="text-[15px] font-semibold tracking-wide text-[#222] sm:text-[16px]">
               MY REVIEWS
             </h2>
           </div>
@@ -441,21 +430,24 @@ const Profile = () => {
           ) : (
             <div className="space-y-5">
               {reviews.map((review) => (
-                <div key={review._id} className="border border-gray-200 p-6">
-                  <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
-                    <div>
-                      <h3 className="text-[15px] font-semibold text-[#222] mb-3">
+                <div
+                  key={review._id}
+                  className="border border-gray-200 p-4 sm:p-6"
+                >
+                  <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between md:gap-6">
+                    <div className="min-w-0">
+                      <h3 className="mb-3 text-[15px] font-semibold text-[#222]">
                         {review.product?.name || "Product"}
                       </h3>
 
-                      <div className="flex gap-1 mb-4">
+                      <div className="mb-4 flex gap-1">
                         {[1, 2, 3, 4, 5].map((star) => (
                           <FiStar
                             key={star}
                             size={16}
                             className={
                               star <= review.rating
-                                ? "text-[#B87575] fill-[#B87575]"
+                                ? "fill-[#B87575] text-[#B87575]"
                                 : "text-gray-300"
                             }
                           />
@@ -463,27 +455,28 @@ const Profile = () => {
                       </div>
 
                       {review.title && (
-                        <h4 className="text-sm font-semibold text-[#222] mb-2">
+                        <h4 className="mb-2 text-sm font-semibold text-[#222]">
                           {review.title}
                         </h4>
                       )}
 
                       {review.comment && (
-                        <p className="text-sm text-gray-500 leading-6 max-w-[650px]">
+                        <p className="max-w-[650px] text-sm leading-6 text-gray-500">
                           {review.comment}
                         </p>
                       )}
                     </div>
 
+                    {/* Phone: EDIT and DELETE split the row evenly */}
                     <div className="flex items-center gap-3">
-                      <button className="flex items-center gap-2 border border-gray-300 px-4 py-2 text-[10px] font-medium hover:border-[#B87575] hover:text-[#B87575] transition duration-300">
+                      <button className="flex flex-1 items-center justify-center gap-2 border border-gray-300 px-4 py-2.5 text-[10px] font-medium transition duration-300 hover:border-[#B87575] hover:text-[#B87575] md:flex-none md:py-2">
                         <FiEdit2 size={14} />
                         EDIT
                       </button>
 
                       <button
                         onClick={() => handleDelete(review._id)}
-                        className="flex items-center gap-2 border border-red-200 text-red-500 px-4 py-2 text-[10px] font-medium hover:bg-red-500 hover:text-white transition duration-300"
+                        className="flex flex-1 items-center justify-center gap-2 border border-red-200 px-4 py-2.5 text-[10px] font-medium text-red-500 transition duration-300 hover:bg-red-500 hover:text-white md:flex-none md:py-2"
                       >
                         <FiTrash2 size={14} />
                         DELETE
@@ -513,7 +506,7 @@ const Profile = () => {
 
       {returnTarget && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4">
-          <div className="w-full max-w-md bg-white p-6 shadow-xl">
+          <div className="max-h-[90vh] w-full max-w-md overflow-y-auto bg-white p-4 shadow-xl sm:p-6">
             <h2 className="text-lg font-semibold text-[#222]">
               Request Return
             </h2>
@@ -522,7 +515,7 @@ const Profile = () => {
               Product: {returnTarget.productName}
             </p>
 
-            <label className="mt-5 mb-2 block text-sm font-medium text-[#222]">
+            <label className="mb-2 mt-5 block text-sm font-medium text-[#222]">
               Reason for Return
             </label>
 
@@ -533,14 +526,14 @@ const Profile = () => {
               className="min-h-[120px] w-full border border-gray-300 p-3 text-sm outline-none focus:border-[#B87575]"
             />
 
-            <div className="mt-5 flex justify-end gap-3">
+            <div className="mt-5 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
               <button
                 onClick={() => {
                   setReturnTarget(null);
                   setReturnReason("");
                 }}
                 disabled={returnLoading}
-                className="border border-gray-300 px-4 py-2 text-xs font-medium"
+                className="border border-gray-300 px-4 py-2.5 text-xs font-medium sm:py-2"
               >
                 CANCEL
               </button>
@@ -548,7 +541,7 @@ const Profile = () => {
               <button
                 onClick={handleReturnRequest}
                 disabled={returnLoading}
-                className="bg-[#B87575] px-4 py-2 text-xs font-medium text-white disabled:opacity-50"
+                className="bg-[#B87575] px-4 py-2.5 text-xs font-medium text-white disabled:opacity-50 sm:py-2"
               >
                 {returnLoading ? "SUBMITTING..." : "SUBMIT REQUEST"}
               </button>

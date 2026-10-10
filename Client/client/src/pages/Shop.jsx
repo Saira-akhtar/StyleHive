@@ -11,8 +11,7 @@ const Shop = () => {
   const searchQuery = searchParams.get("search") || "";
 
   const [products, setProducts] = useState([]);
-  const [selectedCategory, setSelectedCategory] =
-    useState("All Products");
+  const [selectedCategory, setSelectedCategory] = useState("All Products");
   const [loading, setLoading] = useState(true);
 
   // ===============================
@@ -28,14 +27,9 @@ const Shop = () => {
 
         console.log("Products:", response.data);
 
-        setProducts(
-          response.data.products || response.data
-        );
+        setProducts(response.data.products || response.data);
       } catch (error) {
-        console.error(
-          "Error fetching products:",
-          error
-        );
+        console.error("Error fetching products:", error);
       } finally {
         setLoading(false);
       }
@@ -56,15 +50,9 @@ const Shop = () => {
 
     // Search filter
     const matchesSearch =
-      product.name
-        ?.toLowerCase()
-        .includes(searchQuery.toLowerCase()) ||
-      product.description
-        ?.toLowerCase()
-        .includes(searchQuery.toLowerCase()) ||
-      product.brand
-        ?.toLowerCase()
-        .includes(searchQuery.toLowerCase());
+      product.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      product.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      product.brand?.toLowerCase().includes(searchQuery.toLowerCase());
 
     return matchesCategory && matchesSearch;
   });
@@ -74,11 +62,7 @@ const Shop = () => {
   // ===============================
 
   if (loading) {
-    return (
-      <div className="py-20 text-center">
-        Loading products...
-      </div>
-    );
+    return <div className="py-20 text-center">Loading products...</div>;
   }
 
   return (
@@ -93,22 +77,19 @@ const Shop = () => {
 
       {/* PRODUCTS */}
 
-      <section className="mx-auto flex max-w-[1200px] gap-8 px-6 py-10">
+      <section className="mx-auto flex max-w-[1200px] flex-col gap-6 px-4 py-8 sm:px-6 lg:flex-row lg:gap-8 lg:py-10">
         <ProductFilters
-          categories={[
-            "All Products",
-            "Men",
-            "Women",
-            "Kids",
-          ]}
+          categories={["All Products", "Men", "Women", "Kids"]}
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
         />
 
-        <ProductGrid
-          products={filteredProducts}
-          total={filteredProducts.length}
-        />
+        <div className="min-w-0 flex-1">
+          <ProductGrid
+            products={filteredProducts}
+            total={filteredProducts.length}
+          />
+        </div>
       </section>
     </div>
   );
