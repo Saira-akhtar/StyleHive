@@ -76,7 +76,9 @@ Security and Access Rules
 Return Requests
 A return request should be accepted only from an authenticated customer who owns the relevant order and meets the store's return policy. Depending on the implementation, a request may include the order item, reason, notes, submission date, and status.
 Project Structure
+
 The frontend is located in Client/client.
+
 StyleHive/
 ├── Client/
 │   └── client/       # React + Vite frontend
